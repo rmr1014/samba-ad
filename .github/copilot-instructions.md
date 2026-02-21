@@ -1,3 +1,12 @@
+# Important: Unix Line Endings for Docker Scripts
+
+All shell scripts (e.g., init-dc.sh, init-fs.sh, vars.sh) used in Docker builds must use Unix (LF) line endings. Windows (CRLF) line endings will cause errors such as $'\r': command not found and prevent scripts from running in Linux containers.
+
+To convert:
+- In VS Code, open the script and select "LF" in the bottom-right status bar, then save.
+- Or use a tool like dos2unix.
+
+Always verify scripts are saved with LF before building Docker images.
 # Copilot Instructions for Samba AD & File Server Docker Environment
 
 ## Overview
