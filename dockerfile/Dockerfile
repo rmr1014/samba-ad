@@ -30,15 +30,15 @@ RUN rm /etc/samba/smb.conf
 
 # Helper files
 RUN  mkdir -p /usr/helpers
-COPY --chmod=755 vars.sh /usr/helpers/vars.sh
+COPY --chmod=755 dockerfile/vars.sh /usr/helpers/vars.sh
 
 #
 # Target stage for DCs
 #
 FROM base AS dc
 
-COPY --chmod=755 init-dc.sh /usr/helpers/init-dc.sh
-COPY --chmod=755 samba-provision.sh /usr/helpers/samba-provision.sh
+COPY --chmod=755 dockerfile/init-dc.sh /usr/helpers/init-dc.sh
+COPY --chmod=755 dockerfile/samba-provision.sh /usr/helpers/samba-provision.sh
 
 # Start Samba via Tini and our init script
 ENTRYPOINT ["/bin/tini", "--", "/usr/helpers/init-dc.sh"]
@@ -48,8 +48,8 @@ ENTRYPOINT ["/bin/tini", "--", "/usr/helpers/init-dc.sh"]
 #
 FROM base AS fs
 
-COPY --chmod=755 init-fs.sh /usr/helpers/init-fs.sh
-COPY --chmod=755 samba-join.sh /usr/helpers/samba-join.sh
+COPY --chmod=755 dockerfile/init-fs.sh /usr/helpers/init-fs.sh
+COPY --chmod=755 dockerfile/samba-join.sh /usr/helpers/samba-join.sh
 
 # Start Samba via Tini and our init script
 ENTRYPOINT ["/bin/tini", "--", "/usr/helpers/init-fs.sh"]

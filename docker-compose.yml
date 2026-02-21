@@ -4,7 +4,8 @@ services:
     container_name: ${DC_NAME}
     hostname: ${DC_NAME}
     build:
-      context: ./dockerfile
+      context: .
+      dockerfile: dockerfile/Dockerfile
       target: dc
     restart: unless-stopped
     volumes:
@@ -32,7 +33,8 @@ services:
     container_name: ${FS_NAME}
     hostname: ${FS_NAME}
     build:
-      context: ./dockerfile
+      context: .
+      dockerfile: dockerfile/Dockerfile
       target: fs
     restart: unless-stopped
     volumes:
